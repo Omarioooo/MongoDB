@@ -1,5 +1,4 @@
-# MongoDB Cheat Sheet & Learning Guide
-_By Omar Mohamed_
+# MongoDB Cheat Sheet
 
 ---
 
