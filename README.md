@@ -18,6 +18,9 @@ ___
    - Document is a set of key-value pairs.
    - Documents in a collection are of similar or related purpose.
    - Documents have `dynamic schema` OR `Schema less`  __(means that documents in the same collection do not need to have the same set of fields or structure, and common fields in a collection's documents may hold different types of data.)__.
+
+- `RDBMS` VS `MongoDB`     
+ ----------------------
  
 | RDBMS         | MongoDB                          |
 |---------------|----------------------------------|
