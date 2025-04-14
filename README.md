@@ -84,3 +84,146 @@ db.dataTypesExample.insertOne({
     minKeyExample: MinKey(),
     maxKeyExample: MaxKey()
 });
+
+___
+
+# MongoDB Cheat Sheet 🐋
+_By Omar Mohamed_
+
+---
+
+## 📚 Terminology
+
+| Term         | Description                                                                                        |
+|--------------|----------------------------------------------------------------------------------------------------|
+| **Database** | A container for collections (similar to a database in SQL).                                         |
+| **Collection** | A grouping of documents inside a database (similar to a table in SQL).                             |
+| **Document** | A single record in a collection (similar to a row in SQL). It’s usually a JSON object.              |
+| **Field**    | A key-value pair inside a document (similar to a column in SQL). Can store arrays, JSON objects, etc.|
+
+---
+
+## 💻 Basic Commands
+
+```bash
+mongosh               # Open a connection to MongoDB
+show dbs              # Show all databases
+use <dbname>          # Switch to a database
+db                    # Show current database name
+cls                   # Clear the terminal screen
+show collections      # Show all collections in the current database
+db.dropDatabase()     # Delete the current database
+exit                  # Exit the mongosh session
+```
+
+---
+
+## 📝 Create Operations
+
+```javascript
+db.<collectionName>.insertOne({ name: "Kyle" })
+// Insert a single document
+
+db.<collectionName>.insertMany([{ age: 26 }, { age: 20 }])
+// Insert multiple documents
+```
+
+---
+
+## 🔍 Read Operations
+
+```javascript
+db.<collectionName>.find()
+// Get all documents
+
+db.<collectionName>.find({ name: "Kyle" })
+// Get all documents where name is Kyle
+
+db.<collectionName>.find({ "address.street": "123 Main St" })
+// Get all where address.street is "123 Main St"
+
+db.<collectionName>.find({ name: "Kyle" }, { name: 1, age: 1 })
+// Return only specific fields (name, age, _id)
+
+db.<collectionName>.find({}, { age: 0 })
+// Return all fields except age
+
+db.<collectionName>.findOne({ name: "Kyle" })
+// Return the first matching document
+
+db.<collectionName>.countDocuments({ name: "Kyle" })
+// Count documents matching filter
+```
+
+---
+
+## 🔧 Update Operations
+
+```javascript
+db.<collectionName>.updateOne({ age: 20 }, { $set: { age: 21 } })
+// Update first document matching filter
+
+db.<collectionName>.updateMany({ age: 12 }, { $inc: { age: 3 } })
+// Update multiple documents
+
+db.<collectionName>.replaceOne({ age: 12 }, { age: 13 })
+// Replace document entirely
+```
+
+---
+
+## 🗑️ Delete Operations
+
+```javascript
+db.<collectionName>.deleteOne({ age: 20 })
+// Delete first matching document
+
+db.<collectionName>.deleteMany({ age: 12 })
+// Delete all matching documents
+```
+
+---
+
+## ⚙️ Complex Filter Operators
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `$eq`    | Equal to    | `db.users.find({ name: { $eq: "Kyle" } })` |
+| `$ne`    | Not equal   | `db.users.find({ name: { $ne: "Kyle" } })` |
+| `$gt` / `$gte` | Greater than / or equal | `db.users.find({ age: { $gt: 12 } })` |
+| `$lt` / `$lte` | Less than / or equal | `db.users.find({ age: { $lt: 12 } })` |
+| `$in`    | Value in array | `db.users.find({ name: { $in: ["Kyle", "Mike"] } })` |
+| `$nin`   | Value not in array | `db.users.find({ name: { $nin: ["Kyle", "Mike"] } })` |
+| `$and`   | All conditions must be true | `db.users.find({ $and: [{ age: 12 }, { name: "Kyle" }] })` |
+| `$or`    | One of the conditions must be true | `db.users.find({ $or: [{ age: 12 }, { name: "Kyle" }] })` |
+| `$not`   | Negate the condition | `db.users.find({ name: { $not: { $eq: "Kyle" } } })` |
+| `$exists`| Field existence check | `db.users.find({ name: { $exists: true } })` |
+| `$expr`  | Compare fields | `db.users.find({ $expr: { $gt: ["$balance", "$debt"] } })` |
+
+---
+
+## 🛠️ Complex Update Operators
+
+| Operator  | Description                     | Example |
+|-----------|---------------------------------|---------|
+| `$set`    | Set fields                     | `db.users.updateOne({ age: 12 }, { $set: { name: "Hi" } })` |
+| `$inc`    | Increment numeric fields       | `db.users.updateOne({ age: 12 }, { $inc: { age: 2 } })` |
+| `$rename` | Rename fields                  | `db.users.updateMany({}, { $rename: { age: "years" } })` |
+| `$unset`  | Remove fields                  | `db.users.updateOne({ age: 12 }, { $unset: { age: "" } })` |
+| `$push`   | Add value to array             | `db.users.updateMany({}, { $push: { friends: "John" } })` |
+| `$pull`   | Remove value from array        | `db.users.updateMany({}, { $pull: { friends: "Mike" } })` |
+
+---
+
+## 📟️ Read Modifiers
+
+```javascript
+db.users.find().sort({ name: 1, age: -1 })
+// Sort by name (asc) and age (desc)
+
+db.users.find().limit(2)
+// Return only 2 documents
+
+db.users.find().skip(4)
+// Skip first 4 documents
+```
