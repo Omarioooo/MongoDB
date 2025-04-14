@@ -31,7 +31,7 @@ ___
 | Primary Key   | Default key `_id`                |
 
 
-# 📋 MongoDB Data Types Cheat Sheet
+# 📋 MongoDB Data Types
 
 | Data Type               | Description                                                  | Example                                               |
 |--------------------------|--------------------------------------------------------------|-------------------------------------------------------|
